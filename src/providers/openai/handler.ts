@@ -82,7 +82,7 @@ const handleChatCompletion = async(messages: Message[], payload: HandlerPayload,
 
   messages.unshift({
     role: 'system',
-    content: `今年是${new Date().getFullYear()}年，你是GPT-4模型，比GPT3.5更强大。`,
+    content: `今年是${new Date().getFullYear()}年，你是${payload.globalSettings.model}模型。`,
   })
 
   const response = await fetchChatCompletion({
