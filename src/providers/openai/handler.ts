@@ -77,11 +77,13 @@ const handleChatCompletion = async(messages: Message[], payload: HandlerPayload,
     if (resJson.code !== 200)
       return resJson.message
   }
+  // We will add a system message with the current year to the beginning of the messages array
+// The system message will contain the current year as determined by the Date function.
 
-  // messages.unshift({
-  //   role: 'system',
-  //   content: '你是GPT4,比GPT3更聪明,请认真思考后回答',
-  // })
+  messages.unshift({
+    role: 'system',
+    content: `今年是${new Date().getFullYear()}年，你是GPT-4模型，比GPT3.5更强大。`,
+  })
 
   const response = await fetchChatCompletion({
     apiKey: payload.globalSettings.apiKey as string,
