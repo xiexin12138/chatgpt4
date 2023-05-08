@@ -34,7 +34,21 @@ export default () => {
           )}
         </For>
       </main>
+      <div
+        style={{
+          'display': 'flex',
+          'flex-direction': 'column',
+          'align-items': 'center',
+          'gap': '0.5rem',
+        }}
+      >
+        <img style={{ width: '70%' }} src="https://gpthink.xyz/img/joinGroup.1f8ffbb8.jpg" alt="Join our group" />
+        <div style={{ 'font-size': '0.75rem' }}>☕️ 如果你对 AIGC 感兴趣，欢迎加群</div>
+        <div style={{ 'font-size': '0.75rem' }}>如无法入群，请联系微信：AIGCHelper</div>
+      </div>
+
       <footer class="h-14 fi justify-between px-3">
+
         <ThemeToggle />
         <div text-xs op-40 px-2>
           <a href="https://gi5z65mgmgu.feishu.cn/docx/XnL6dUrznokUVcxNJ74czcInnCc" target="_blank" rel="noreferrer" class="hv-foreground">

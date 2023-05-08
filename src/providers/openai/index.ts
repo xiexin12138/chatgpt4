@@ -48,7 +48,7 @@ const providerOpenAI = () => {
         type: 'slider',
         min: 100,
         max: 4000,
-        default: 2000,
+        default: 500,
         step: 1,
       },
       {

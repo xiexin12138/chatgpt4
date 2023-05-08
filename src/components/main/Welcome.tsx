@@ -67,7 +67,10 @@ export default (props: Props) => {
             setUser={props.setUser}
             user={props.user}
           />
-          <a href="https://gi5z65mgmgu.feishu.cn/docx/XnL6dUrznokUVcxNJ74czcInnCc" target="_blank" class="fi gap-2 h-8 text-sm op-60" rel="noreferrer">查看使用说明</a>
+          <div class="fi gap-2">
+            <a href="https://gi5z65mgmgu.feishu.cn/docx/XnL6dUrznokUVcxNJ74czcInnCc" target="_blank" class="fi gap-2 h-8 text-sm op-60" rel="noreferrer"><strong>查看使用说明</strong></a>
+            <span class="fi gap-2 h-8 text-sm op-60">( 字数消耗=提问字数+答案字数)</span>
+          </div>
           <div class="px-6 py-4 bg-base-100 border border-base rounded-lg">
             <h2 class="text-xs op-30 uppercase my-2">最近对话</h2>
             <div class="flex flex-col items-start">

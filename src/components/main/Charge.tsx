@@ -111,9 +111,12 @@ export default (props: Props) => {
       <Show when={showCharge()}>
         <div class="mt-4">
           <Show when={!url()}>
-            <span class="text-sm">
-              请选择充值金额, GPT4按字数计费(注意!不是次数)
-            </span>
+            <div class="text-sm">
+              请选择充值金额, GPT4按字数计费
+            </div>
+            <div class="text-sm">
+              (计算方法：消耗字数=提问字数+输出字数。说明：这是OpenAI官方的计算方法，网站沿用官方计费模式。)
+            </div>
             <div class="flex space-x-2 text-sm">
               <button onClick={() => { getPaycode(5) }} class="w-1/3 h-12 mt-2 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 rounded-sm">
                 5元<br />5000字
