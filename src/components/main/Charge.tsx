@@ -1,4 +1,4 @@
-import { Show, createSignal, onMount } from 'solid-js'
+import { Index, Show, createSignal, onMount } from 'solid-js'
 import type { User } from '@/types'
 import type { Accessor, Setter } from 'solid-js'
 interface Props {
@@ -6,8 +6,11 @@ interface Props {
   user: Accessor<User>
 }
 
+interface PayInfoType { name: string, price: number }
+
 export default (props: Props) => {
   onMount(async() => {
+    getPayInfo()
     setInterval(() => {
       const userJson = JSON.parse(localStorage.getItem('user') as string)
       props.user().word = userJson.word
@@ -20,6 +23,8 @@ export default (props: Props) => {
   const [countdown, setCountdown] = createSignal(0)
   const [url, setUrl] = createSignal('')
   const [showCharge, setShowCharge] = createSignal(false)
+
+  const [payinfo, setPayinfo] = createSignal<PayInfoType[]>([{ name: '', price: 0 }])
 
   const selfCharge = async() => {
     const response = await fetch('/api/exchange', {
@@ -41,6 +46,23 @@ export default (props: Props) => {
     } else {
       alert(responseJson.message)
     }
+  }
+
+  const getPayInfo = async() => {
+    const response = await fetch('/api/getpayinfo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        token: localStorage.getItem('token'),
+      }),
+    })
+    const responseJson = await response.json()
+    if (responseJson.code === 200)
+      setPayinfo(responseJson.data)
+    else
+      alert(responseJson.message)
   }
 
   const close = () => {
@@ -111,22 +133,17 @@ export default (props: Props) => {
       <Show when={showCharge()}>
         <div class="mt-4">
           <Show when={!url()}>
-            <div class="text-sm">
-              请选择充值金额, GPT4按字数计费
-            </div>
-            <div class="text-sm">
-              (计算方法：消耗字数=提问字数+输出字数。说明：这是OpenAI官方的计算方法，网站沿用官方计费模式。)
-            </div>
-            <div class="flex space-x-2 text-sm">
-              <button onClick={() => { getPaycode(5) }} class="w-1/3 h-12 mt-2 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 rounded-sm">
-                5元<br />5000字
-              </button>
-              <button onClick={() => { getPaycode(10) }} class="w-1/3 h-12 mt-2 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 rounded-sm">
-                10元<br />10500字
-              </button>
-              <button onClick={() => { getPaycode(20) }} class="w-1/3 h-12 mt-2 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 rounded-sm">
-                20元<br />22000字
-              </button>
+            <span class="text-sm">
+              请选择充值金额,GPT4按字数计费
+            </span>
+            <div class="flex space-x-2 text-xs">
+              <Index each={payinfo()}>
+                {(v, _) => (
+                  <button onClick={() => { getPaycode(v().price) }} class="w-1/3 h-12 mt-2 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 rounded-sm">
+                    {v().name}
+                  </button>
+                )}
+              </Index>
             </div>
           </Show>
           <Show when={url()}>
@@ -134,19 +151,22 @@ export default (props: Props) => {
               请在{countdown()}秒内完成支付
             </span>
             <img class="w-1/3 mt-2" src={url()} />
+            <div class="text-sm mt-2">
+              付款后长时间未到账? 可在支付宝-我的-账单-联系收款方 中给我发送订单号
+            </div>
           </Show>
         </div>
 
         <hr class="mt-4" />
         <div class="flex mt-4">
           <span class="text-sm">
-            有兑换码? 请在下方输入次数兑换码
+            有兑换码? 可在下方输入字数兑换码
           </span>
         </div>
 
         <input
           ref={emailRef!}
-          placeholder="请输入次数兑换码"
+          placeholder="请输入字数兑换码"
           type="text"
           class="gpt-password-input w-full mt-2"
           value=""
