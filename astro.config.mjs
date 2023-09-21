@@ -54,7 +54,7 @@ export default defineConfig({
               type: 'image/png',
             },
             {
-              src: 'icon.svg',
+              src: 'logo.svg',
               sizes: '32x32',
               type: 'image/svg',
               purpose: 'any maskable',

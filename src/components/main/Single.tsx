@@ -7,7 +7,6 @@ import type { User } from '@/types'
 interface Props {
   conversationId: string
   messages: Accessor<MessageInstance[]>
-
   setUser: Setter<User>
   user: Accessor<User>
 }
