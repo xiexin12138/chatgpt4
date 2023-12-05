@@ -154,7 +154,7 @@ export default (props: Props) => {
               <img class="w-3/5 max-w-[200px] mt-2" src={url()} />
             </div>
             <div class="text-sm mt-2">
-              付款后长时间未到账? 可在支付宝-我的-账单-联系收款方 中给我发送订单号
+              付款遇到问题? 可添加微信 AIGCHelper 联系客服支持；或在支付宝-我的-账单-联系收款方 中给我发送订单号
             </div>
           </Show>
         </div>
