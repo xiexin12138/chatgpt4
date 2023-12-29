@@ -1,6 +1,6 @@
 import { action, atom, map } from 'nanostores'
 import { db } from './storage/settings'
-import { getProviderById, providerMetaList } from './provider'
+import { getProviderById, providerList, providerMetaList } from './provider'
 import type { SettingsPayload } from '@/types/provider'
 import type { GeneralSettings } from '@/types/app'
 
@@ -8,6 +8,7 @@ export const providerSettingsMap = map<Record<string, SettingsPayload>>({})
 export const globalAbortController = atom<AbortController | null>(null)
 
 export const rebuildSettingsStore = async() => {
+  console.log('🚀 ~ file: settings.ts:4 ~ providerList:', providerList)
   const exportData = await db.exportData()
   console.log('🚀 ~ file: settings.ts:12 ~ rebuildSettingsStore ~ exportData:', exportData)
   const defaultData = defaultSettingsStore()
