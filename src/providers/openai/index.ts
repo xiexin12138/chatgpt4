@@ -34,7 +34,6 @@ const providerOpenAI = () => {
         type: 'select',
         options: [
           { value: 'gpt-4-1106-preview', label: 'gpt-4-1106-preview' },
-          { value: 'gpt-4', label: 'gpt-4' },
         ],
         default: 'gpt-4-1106-preview',
       },
