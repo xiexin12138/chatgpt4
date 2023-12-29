@@ -35,7 +35,7 @@ const providerOpenAI = () => {
         options: [
           { value: 'gpt-4-1106-preview', label: 'gpt-4' },
         ],
-        default: 'gpt-4',
+        default: 'gpt-4-1106-preview',
       },
       {
         key: 'maxTokens',
