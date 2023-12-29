@@ -30,10 +30,11 @@ const providerOpenAI = () => {
       {
         key: 'model',
         name: 'ChatGPT版本',
-        description: 'ChatGPT版本',
+        description: '请选择GPT的版本',
         type: 'select',
         options: [
           { value: 'gpt-4-1106-preview', label: 'gpt-4-1106-preview' },
+          { value: 'gpt-4', label: 'gpt-4' },
         ],
         default: 'gpt-4-1106-preview',
       },
