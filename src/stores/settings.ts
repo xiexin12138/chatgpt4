@@ -1,6 +1,6 @@
 import { action, atom, map } from 'nanostores'
 import { db } from './storage/settings'
-import { getProviderById, providerList, providerMetaList } from './provider'
+import { getProviderById, providerMetaList } from './provider'
 import type { SettingsPayload } from '@/types/provider'
 import type { GeneralSettings } from '@/types/app'
 
@@ -8,13 +8,18 @@ export const providerSettingsMap = map<Record<string, SettingsPayload>>({})
 export const globalAbortController = atom<AbortController | null>(null)
 
 export const rebuildSettingsStore = async() => {
-  console.log('🚀 ~ file: settings.ts:4 ~ providerList:', providerList)
   const exportData = await db.exportData()
-  console.log('🚀 ~ file: settings.ts:12 ~ rebuildSettingsStore ~ exportData:', exportData)
   const defaultData = defaultSettingsStore()
-  console.log('🚀 ~ file: settings.ts:14 ~ rebuildSettingsStore ~ defaultData:', defaultData)
   const data: Record<string, SettingsPayload> = {}
   providerMetaList.forEach((provider) => {
+    const modelSetting = getProviderById(provider.id)?.globalSettings?.find(obj => obj.key === 'model')
+    if (modelSetting?.type === 'select') {
+      const modelList = modelSetting.options
+      const isExistModel = modelList.some(model => model.value === exportData?.[provider.id]?.model)
+
+      if (!isExistModel && exportData?.[provider.id]?.model)
+        exportData[provider.id].model = modelList?.[0]?.value
+    }
     data[provider.id] = {
       ...defaultData[provider.id] || {},
       ...exportData?.[provider.id] || {},
