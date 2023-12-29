@@ -9,7 +9,9 @@ export const globalAbortController = atom<AbortController | null>(null)
 
 export const rebuildSettingsStore = async() => {
   const exportData = await db.exportData()
+  console.log('🚀 ~ file: settings.ts:12 ~ rebuildSettingsStore ~ exportData:', exportData)
   const defaultData = defaultSettingsStore()
+  console.log('🚀 ~ file: settings.ts:14 ~ rebuildSettingsStore ~ defaultData:', defaultData)
   const data: Record<string, SettingsPayload> = {}
   providerMetaList.forEach((provider) => {
     data[provider.id] = {

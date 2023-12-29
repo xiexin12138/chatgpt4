@@ -38,7 +38,6 @@ export default (props: Props) => {
           props.setUser(responseJson.data)
           setTimeout(() => {
             const setting = getSettingsByProviderId('provider-openai')
-            console.log('🚀 ~ file: Welcome.tsx:41 ~ setTimeout ~ setting:', setting)
             setSettingsByProviderId('provider-openai', {
               authToken: localStorage.getItem('token') as string,
               maxTokens: setting.maxTokens,
