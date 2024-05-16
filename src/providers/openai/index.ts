@@ -33,9 +33,9 @@ const providerOpenAI = () => {
         description: '请选择GPT的版本',
         type: 'select',
         options: [
-          { value: 'gpt-4-1106-preview', label: 'gpt-4-1106-preview' },
+          { value: 'gpt-4o', label: 'gpt-4o' },
         ],
-        default: 'gpt-4-1106-preview',
+        default: 'gpt-4o',
       },
       {
         key: 'maxTokens',
