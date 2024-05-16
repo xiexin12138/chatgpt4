@@ -75,7 +75,7 @@ export default (props: Props) => {
             setUser={props.setUser}
             user={props.user}
           />
-          <span style={{ color: 'red' }} >使用了价格更优惠的GPT4-Preview模型，充值的字数将额外多30%</span>
+          <span style={{ color: 'red' }} >更新为最新的 gpt-4o 模型</span>
           <a href="https://z0mjw1ejzdy.feishu.cn/docx/SO7Td80Tvo302JxogJkcnFL6n6b" target="_blank" class="fi gap-2 h-8 text-sm op-60 w-auto" rel="noreferrer">查看使用说明</a>
           <div class="px-6 py-4 bg-base-100 border border-base rounded-lg">
             <h2 class="text-xs op-30 uppercase my-2">{t('conversations.recent')}</h2>
